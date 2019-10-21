@@ -13,7 +13,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      git 基本概念（零） | 徐伟智
+      Python函数参数传递机制 | 徐伟智
     
   </title>
   <meta name="author" content="徐伟智">
@@ -165,7 +165,7 @@
 	<!-- Page title -->
 	<p>
 		
-			当前文章&nbsp;:&nbsp;《git 基本概念（零）》
+			当前文章&nbsp;:&nbsp;《Python函数参数传递机制》
 		
 	</p>
 
@@ -286,8 +286,8 @@
 	<div class="article-title">
 		<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
 		
-	<a href="/linux/linux/git/git -- zero/" itemprop="url">
-		git 基本概念（零）
+	<a href="/python/pyhton/parameter_passing/" itemprop="url">
+		Python函数参数传递机制
 	</a>
 
 	</div>
@@ -300,9 +300,9 @@
 
 	发布于
 
-	<a href="/linux/linux/git/git -- zero/" itemprop="url">
-		<time datetime="2019-10-15T01:46:19.000Z" itemprop="datePublished">
-	  		2019-10-15
+	<a href="/python/pyhton/parameter_passing/" itemprop="url">
+		<time datetime="2019-10-20T03:23:00.000Z" itemprop="datePublished">
+	  		2019-10-20
 	  </time>
 	</a>
 	&nbsp;
@@ -318,9 +318,9 @@
 
 	更新于
 
-	<a href="/linux/linux/git/git -- zero/" itemprop="url">
-		<time datetime="2019-10-15T01:46:19.000Z" itemprop="dateUpdated">
-	  		2019-10-18
+	<a href="/python/pyhton/parameter_passing/" itemprop="url">
+		<time datetime="2019-10-20T03:23:00.000Z" itemprop="dateUpdated">
+	  		2019-10-21
 	  </time>
 	</a> 
 
@@ -331,8 +331,8 @@
 			<i class="fa fa-tags"></i>
 			
 	
-		<a href="/tags/git/" class=" ">
-			git
+		<a href="/tags/python/" class=" ">
+			python
 		</a>
 	
 		
@@ -341,7 +341,7 @@
 		
 
 	
-    <span class="leancloud_visitors" id="/linux/linux/git/git -- zero/_visitors" data-url="/linux/linux/git/git -- zero/" data-title="git 基本概念（零）">
+    <span class="leancloud_visitors" id="/python/pyhton/parameter_passing/_visitors" data-url="/python/pyhton/parameter_passing/" data-title="Python函数参数传递机制">
        	<i class="fa fa-eye"></i>
        	热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
@@ -351,7 +351,7 @@
 
 
 	
-    <span class="leancloud_likes" id="/linux/linux/git/git -- zero/_likes" data-url="/linux/linux/git/git -- zero/" data-title="git 基本概念（零）" rel="unlike">
+    <span class="leancloud_likes" id="/python/pyhton/parameter_passing/_likes" data-url="/python/pyhton/parameter_passing/" data-title="Python函数参数传递机制" rel="unlike">
         <i class="fa fa-heart"></i>
         喜欢
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -360,29 +360,45 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h2 id="工作区，暂存区，版本库的文件"><a href="#工作区，暂存区，版本库的文件" class="headerlink" title="工作区，暂存区，版本库的文件"></a>工作区，暂存区，版本库的文件</h2><p> 区分三者关系</p>
-<blockquote>
-<p>Git最让你迷惑的无非是它里面的各种概念了，如果是刚开始接触Git希望看完本篇介绍之后有一个清晰的认识，笔者认识也有限这里只说说个人对使用Git的感受，说一下它里面的几个最常用的概念的理解。</p>
-</blockquote>
-<blockquote>
-<p>在初始化git版本库之后会生成一个隐藏的文件 .git ，可以将该文件理解为git的版本库 repository，而我们自己建立的项目文件夹即工作区 working directory ,在.git 文件夹里面还有很多文件，其中有一个index 文件 就是暂存区也可以叫做 stage ,git还为我们自动生成了一个分支master以及指向该分支的指针head ,如下图   </p>
-</blockquote>
-<p>从图中可以看出来respository包括分支master和stage, working diretory 可以理解为我们打开开发环境如eclipse，里面的内容即工作区的内容，在工作区里面有的代码以及配置文件等我们需要提交到版本库里面，最终是到了分支master上面，暂存区只是一个临时保存修改文件的地方。</p>
-<p>实例讲解<br>平时我们使用的命令git add file1 是把文件从工作区提交到暂存区，git commit -m “prompty” file1 是把文件从暂存区提交到了分支master下面，这里因为只有一个分支master，就提交到master上了，下面让我们再来结合具体例子来说明一下。</p>
-<p>我们修改一下tgb.txt文件增加一行 “l love you” ,并新建一个文件 test1.txt，现在还没有执行git add命令，这种修改都还停留在工作区内，用git status查看状态，如图</p>
-<p>上图表明修改并没有在暂存区里面，当我们执行git add test1.txt ,git add tgb.txt后，再来看一下状态</p>
-<p>这两个文件被添加到了暂存区，但是还没有提交，当执行git commit -m “tijiao” 后文件即从暂存区到了master分支上面，如图将看不到暂存区里面有什么内容。</p>
-<p>Git管理的是添加到暂存区里面的修改，包括增删改等等都算是可以跟踪的文件变动，也可以说git只管理我们变动的部分变动的我们才往暂存区提交，这也是git比其他版本系统设计优秀的一点，以后，会详细说一下各个版本系统管理文件是如何管理的，他们的设计思想是什么。</p>
-<p>通过三个命令理解<br>下面还有一个需要注意的git diff 命令的差异：</p>
-<p>  git diff 比较的是工作区和暂存区的差别<br>  git diff –cached 比较的是暂存区和版本库的差别<br>  git diff HEAD 可以查看工作区和版本库的差别</p>
-<p>  通过一个添加文件既可以明显看出他们之间区别，不过这里有一个前提是已经提交到暂存区的文件修改的时候才可以看出明显区别，这也是以为啥git只能跟着提交到暂存区的文件，如果只是在工作区新建一个文件，那么输入这三个命令都没有结果为空白。</p>
-<p>  我们继续修改tgb.txt，在文件末尾添加  we are good boy.</p>
-<p>  分别输入三个命令，效果为：</p>
-<p>  从图中可以看出，工作区与暂存区、工作区与版本库都有变化，而版本库与暂存区并没有变化。进一步执行git add tgb.txt </p>
-<p>  执行git add tgb.txt之后发现git diff没有输出内容，表明工作区与暂存区已经同步，暂存区与版本库、版本库与工作区没有同步。最后一步执行git commit </p>
-<p>   当执行完git commit后，三个命令都没有输出结果，表明我们修改的文件已经被同步的版本库，已经被版本库管理起来了。</p>
-<p>总结：<br>       版本库管理文件会很方便尤其是代码，等好多的命令熟了之后也会觉得并不是那么难用，主要使用的时候觉得git反应比较快，而且速度还可以，现在很多人都在window开发而喜欢具有界面的版本工具软件，而不去学习git命令，学习一些git 命令还是很有用的，假如让你去linux上面开发或者在linux系统上面管理代码，你就会完全束手无策不懂原理也不懂命令，需要从新学习从新认识git。</p>
-<pre><code>可以说各种命令是git的根本，学习了命令无论哪一个界面管理工作一看也就会了，现在有好多的git可视化工具，不如学几个命令，况且再多的界面底层也是调用这么多的命令来实现的，有了界面就让我们变懒了，降低了开发者的水平，提高开发效率的同时也失去了更多的学习、研究机会。</code></pre>	
+		<p>Python中，函数参数由实参传递给形参的过程，是由参数传递机制来控制的。通过学习《Python函数值传递和引用传递》一节我们知道，根据实际参数的类型不同，函数参数的传递方式分为值传递和引用传递（又称为地址传递），本节将对这两种传递机制做深度剖析。</p>
+<h3 id="Python函数参数的值传递机制"><a href="#Python函数参数的值传递机制" class="headerlink" title="Python函数参数的值传递机制"></a>Python函数参数的值传递机制</h3><p>所谓值传递，实际上就是将实际参数值的副本（复制品）传入函数，而参数本身不会受到任何影响。<br>值传递的方式，类似于《西游记》里的孙悟空，它复制一个假孙悟空，假孙悟空具有的能力和真孙悟空相同，可除妖或被砍头。但不管这个假孙悟空遇到什么事，真孙悟空都不会受到任何影响。与此类似，传入函数的是实际参数值的复制品，不管在函数中对这个复制品如何操作，实际参数值本身不会受到任何影响。</p>
+<p>下面程序演示了函数参数进行值传递的效果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(a , b)</span> :</span></span><br><span class="line">    <span class="comment"># 下面代码实现a、b变量的值交换</span></span><br><span class="line">    a, b = b, a</span><br><span class="line">    print(<span class="string">"swap函数里，a的值是"</span>, \</span><br><span class="line">        a, <span class="string">"；b的值是"</span>, b)</span><br><span class="line">a = <span class="number">6</span></span><br><span class="line">b = <span class="number">9</span></span><br><span class="line">swap(a , b)</span><br><span class="line">print(<span class="string">"交换结束后，变量a的值是"</span>, \</span><br><span class="line">    a , <span class="string">"；变量b的值是"</span>, b)</span><br></pre></td></tr></table></figure>
+
+<p>运行上面程序，将看到如下运行结果：</p>
+<pre><code>swap函数里，a的值是 9 ；b的值是 6
+交换结束后，变量a的值是 6 ；变量b的值是 9</code></pre><p>从上面的运行结果来看，在 swap() 函数里，a 和 b 的值分别是 9、6，交换结束后，变量 a 和 b 的值依然是 6、9。从这个运行结果可以看出，程序中实际定义的变量 a 和 b，并不是 swap() 函数里的 a 和 b 。</p>
+<p>正如前面所讲的，swap() 函数里的 a 和 b 只是主程序中变量 a 和 b 的复制品。下面通过示意图来说明上面程序的执行过程。</p>
+<p>上面程序开始定义了 a、b 两个局部变量，这两个变量在内存中的存储示意图如图 1 所示。</p>
+<p><img src="/img/python/2019-10-20-1.png" alt="111"></p>
+<p>当程序执行 swap() 函数时，系统进入 swap() 函数，并将主程序中的 a、b 变量作为参数值传入 swap() 函数，但传入 swap() 函数的只是 a、b 的副本，而不是 a、b 本身。进入 swap() 函数后，系统中产生了 4 个变量，这 4 个变量在内存中的存储示意图如图 2 所示。</p>
+<p><img src="/img/python/2019-10-20-2.png" alt="111"></p>
+<p>当在主程序中调用 swap() 函数时，系统分别为主程序和 swap() 函数分配两块栈区，用于保存它们的局部变量。将主程序中的 a、b 变量作为参数值传入 swap() 函数，实际上是在 swap() 函数栈区中重新产生了两个变量 a、b，并将主程序栈区中 a、b 变量的值分别赋值给 swap() 函数栈区中的 a、b 参数（就是对 swap() 函数的 a、b 两个变量进行初始化）。此时，系统存在两个 a 变量、两个 b 变量，只是存在于不同的栈区中而己。</p>
+<p>程序在 swap() 函数中交换 a、b 两个变量的值，实际上是对图 2 中灰色区域的 a、b 变量进行交换。交换结束后，输出 swap() 函数中 a、b 变量的值，可以看到 a 的值为 9，b 的值为 6，此时在内存中的存储示意图如图 3 所示。</p>
+<p><img src="/img/python/2019-10-20-3.png" alt="111"></p>
+<p>对比图 3 与图 1，可以看到两个示意图中主程序栈区中 a、b 的值并未有任何改变，程序改变的只是 swap() 函数栈区中 a、b 的值。这就是值传递的实质：当系统开始执行函数时，系统对形参执行初始化，就是把实参变量的值赋给函数的形参变量，在函数中操作的并不是实际的实参变量。</p>
+<h3 id="Python函数参数的引用传递"><a href="#Python函数参数的引用传递" class="headerlink" title="Python函数参数的引用传递"></a>Python函数参数的引用传递</h3><p>如果实际参数的数据类型是可变对象（列表、字典），则函数参数的传递方式将采用引用传递方式。需要注意的是，引用传递方式的底层实现，采用的依然还是值传递的方式。</p>
+<p>下面程序示范了引用传递参数的效果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">swap</span><span class="params">(dw)</span>:</span></span><br><span class="line">    <span class="comment"># 下面代码实现dw的a、b两个元素的值交换</span></span><br><span class="line">    dw[<span class="string">'a'</span>], dw[<span class="string">'b'</span>] = dw[<span class="string">'b'</span>], dw[<span class="string">'a'</span>]</span><br><span class="line">    print(<span class="string">"swap函数里，a元素的值是"</span>,\</span><br><span class="line">        dw[<span class="string">'a'</span>], <span class="string">"；b元素的值是"</span>, dw[<span class="string">'b'</span>])</span><br><span class="line">dw = &#123;<span class="string">'a'</span>: <span class="number">6</span>, <span class="string">'b'</span>: <span class="number">9</span>&#125;</span><br><span class="line">swap(dw)</span><br><span class="line">print(<span class="string">"交换结束后，a元素的值是"</span>,\</span><br><span class="line">    dw[<span class="string">'a'</span>], <span class="string">"；b元素的值是"</span>, dw[<span class="string">'b'</span>])</span><br></pre></td></tr></table></figure>
+
+<p>运行上面程序，将看到如下运行结果：<br>    swap函数里，a元素的值是 9 ；b元素的值是 6<br>    交换结束后，a元素的值是 9 ；b元素的值是 6</p>
+<p>从上面的运行结果来看，在 swap() 函数里，dw 字典的 a、b 两个元素的值被交换成功。不仅如此，当 swap() 函数执行结束后，主程序中 dw 字典的 a、b 两个元素的值也被交换了。这很容易造成一种错觉，即在调用 swap() 函数时，传入 swap() 函数的就是 dw 字典本身，而不是它的复制品。但这只是一种错觉，下面还是结合示意图来说明程序的执行过程。</p>
+<p>程序开始创建了一个字典对象，并定义了一个 dw 引用变量（其实就是一个指针）指向字典对象，这意味着此时内存中有两个东西：对象本身和指向该对象的引用变量。此时在系统内存中的存储示意图如图 4 所示：<br><img src="/img/python/2019-10-20-4.png" alt="111"></p>
+<p>接下来主程序开始调用 swap() 函数，在调用 swap() 函数时，dw 变量作为参数传入 swap() 函数，这里依然采用值传递方式：把主程序中 dw 变量的值赋给 swap() 函数的 dw 形参，从而完成 swap() 函数的 dw 参数的初始化。值得指出的是，主程序中的 dw 是一个引用变量（也就是一个指针），它保存了字典对象的地址值，当把 dw 的值赋给 swap() 函数的 dw 参数后，就是让 swap() 函数的 dw 参数也保存这个地址值，即也会引用到同一个字典对象。图 5 显示了 dw 字典传入 swap() 函数后的存储示意图。</p>
+<p><img src="/img/python/2019-10-20-5.png" alt="111"></p>
+<p>从图 5 来看，这种参数传递方式是不折不扣的值传递方式，系统一样复制了dw 的副本传入 swap() 函数。但由于 dw 只是一个引用变量，因此系统复制的是 dw 变量，并未复制字典本身。</p>
+<p>当程序在 swap() 函数中操作 dw 参数时，由于 dw 只是一个引用变量，故实际操作的还是字典对象。此时，不管是操作主程序中的 dw 变量，还是操作 swap() 函数里的 dw 参数，其实操作的都是它们共同引用的字典对象，它们引用的是同一个字典对象。因此，当在 swap() 函数中交换 dw 参数所引用字典对象的 a、b 两个元素的值后，可以看到在主程序中 dw 变量所引用字典对象的 a、b 两个元素的值也被交换了。</p>
+<p>为了更好地证明主程序中的 dw 和 swap() 函数中的 dw 是两个变量，在 swap() 函数的最后一行增加如下代码：</p>
+<pre><code>#把dw 直接赋值为None，让它不再指向任何对象
+dw = None</code></pre><p>运行上面代码，结果是 swap() 函数中的 dw 变量不再指向任何对象，程序其他地方没有任何改变。主程序调用 swap() 函数后，再次访问 dw 变量的 a、b 两个元素，依然可以输出 9、6。可见，主程序中的 dw 变量没有受到任何影响。实际上，当在 swap() 函数中增加“dw =None”代码后，在内存中的存储示意图如图 6 所示。</p>
+<p><img src="/img/python/2019-10-20-6.png" alt="111"></p>
+<p>从图 6 来看，把 swap() 函数中的 dw 赋值为 None 后，在 swap() 函数中失去了对字典对象的引用，不可再访问该字典对象。但主程序中的 dw 变量不受任何影响，依然可以引用该字典对象，所以依然可以输出字典对象的 a、b 元素的值。</p>
+<p>通过上面介绍可以得出如下两个结论：</p>
+<ul>
+<li>不管什么类型的参数，在 Python 函数中对参数直接使用“=”符号赋值是没用的，直接使用“=”符号赋值并不能改变参数。</li>
+<li>如果需要让函数修改某些数据，则可以通过把这些数据包装成列表、字典等可变对象，然后把列表、字典等可变对象作为参数传入函数，在函数中通过列表、字典的方法修改它们，这样才能改变这些数据。</li>
+</ul>
+	
 	</div>
 	
 	<div id="current-post-cover" data-scr="/img/1.jpg"></div>
@@ -400,12 +416,12 @@
 	<span>
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
-			<a href="/Annie/hexo/git_talk/" title="Annie主题使用 Gitalk" rel="prev">
+			<a href="/tool/tool/idea/idea-linux/" title="IntelliJ 连接 linux" rel="prev">
 				&laquo;上一篇
 			</a>
 		
 		
-			<a href="/linux/linux/git/git -- one/" title="git 基本操作（一）" rel="next">
+			<a href="/tool/tool/idea/idea-plugins/" title="IntelliJ IDEA 插件" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -423,83 +439,6 @@
 <div class="relate-post">
 	
 		<ul>
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/linux/linux/git/git -- branch/" title="git 分支（零）">
-								git 分支（零）			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 15日, 2019				
-							</p>
-							<p class="relate-post-content">
-								1.gitignore忽略项目中的某些文件，vi .gitignore 可创建文件 进去后:wq，向文件写入忽略的配合文件信息。
-比如setting.proterties,在此提交的时候，就会被忽略掉；*.txt忽略txt为后缀的文件...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/linux/linux/git/git -- branch/" title="git 分支（零）">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="git 分支（零）"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/linux/linux/git/git -- one/" title="git 基本操作（一）">
-								git 基本操作（一）			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 15日, 2019				
-							</p>
-							<p class="relate-post-content">
-								1.文件状态对于user.name与user.email来说，有三个地方可以设置
-123456789101112131415git config --global --unset user.name 删除信息git config --...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/linux/linux/git/git -- one/" title="git 基本操作（一）">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="git 基本操作（一）"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/Annie/hexo/git_talk/" title="Annie主题使用 Gitalk">
-								Annie主题使用 Gitalk			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 15日, 2019				
-							</p>
-							<p class="relate-post-content">
-								Gitalk使用方法Gitalk使用方法一新建仓库
-点击你的用户名，定位到github用户主页，新建一个仓库
-
-
-#点击New之后，你应该看到
-
-注册应用Gitalk评论插件的授权机制依赖于OAuth Application，故使用G...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/Annie/hexo/git_talk/" title="Annie主题使用 Gitalk">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="Annie主题使用 Gitalk"/>
-							</a>
-						</div>
-					</li>											
-			
 			
 					<li>
 						<div class="relate-post-text">
@@ -524,29 +463,6 @@
 							<a href="/tool/tool/idea/idea-linux/" title="IntelliJ 连接 linux">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="IntelliJ 连接 linux"/>
-							</a>
-						</div>
-					</li>											
-			
-			
-					<li>
-						<div class="relate-post-text">
-							<a class="relate-post-title" href="/python/pyhton/parameter_passing/" title="Python函数参数传递机制">
-								Python函数参数传递机制			
-							</a>
-							<p class="relate-post-date">
-								<i class="fa fa-calendar"></i>
-								十月 20日, 2019				
-							</p>
-							<p class="relate-post-content">
-								Python中，函数参数由实参传递给形参的过程，是由参数传递机制来控制的。通过学习《Python函数值传递和引用传递》一节我们知道，根据实际参数的类型不同，函数参数的传递方式分为值传递和引用传递（又称为地址传递），本节将对这两种传递机...
-							</p>
-						</div>
-
-						<div class="relate-post-cover">
-							<a href="/python/pyhton/parameter_passing/" title="Python函数参数传递机制">				
-								
-								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="Python函数参数传递机制"/>
 							</a>
 						</div>
 					</li>											
@@ -625,6 +541,30 @@ Shift + Ctrl...
 			
 					<li>
 						<div class="relate-post-text">
+							<a class="relate-post-title" href="/linux/linux/git/git -- branch/" title="git 分支（零）">
+								git 分支（零）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 15日, 2019				
+							</p>
+							<p class="relate-post-content">
+								1.gitignore忽略项目中的某些文件，vi .gitignore 可创建文件 进去后:wq，向文件写入忽略的配合文件信息。
+比如setting.proterties,在此提交的时候，就会被忽略掉；*.txt忽略txt为后缀的文件...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/linux/linux/git/git -- branch/" title="git 分支（零）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="git 分支（零）"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
 							<a class="relate-post-title" href="/Annie/hexo/hexo-view/" title="阅读统计功能">
 								阅读统计功能			
 							</a>
@@ -643,6 +583,84 @@ Shift + Ctrl...
 							<a href="/Annie/hexo/hexo-view/" title="阅读统计功能">				
 								
 								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="阅读统计功能"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/Annie/hexo/git_talk/" title="Annie主题使用 Gitalk">
+								Annie主题使用 Gitalk			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 15日, 2019				
+							</p>
+							<p class="relate-post-content">
+								Gitalk使用方法Gitalk使用方法一新建仓库
+点击你的用户名，定位到github用户主页，新建一个仓库
+
+
+#点击New之后，你应该看到
+
+注册应用Gitalk评论插件的授权机制依赖于OAuth Application，故使用G...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/Annie/hexo/git_talk/" title="Annie主题使用 Gitalk">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="Annie主题使用 Gitalk"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/linux/linux/git/git -- zero/" title="git 基本概念（零）">
+								git 基本概念（零）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 15日, 2019				
+							</p>
+							<p class="relate-post-content">
+								工作区，暂存区，版本库的文件 区分三者关系
+
+Git最让你迷惑的无非是它里面的各种概念了，如果是刚开始接触Git希望看完本篇介绍之后有一个清晰的认识，笔者认识也有限这里只说说个人对使用Git的感受，说一下它里面的几个最常用的概念的理解...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/linux/linux/git/git -- zero/" title="git 基本概念（零）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="git 基本概念（零）"/>
+							</a>
+						</div>
+					</li>											
+			
+			
+					<li>
+						<div class="relate-post-text">
+							<a class="relate-post-title" href="/linux/linux/git/git -- one/" title="git 基本操作（一）">
+								git 基本操作（一）			
+							</a>
+							<p class="relate-post-date">
+								<i class="fa fa-calendar"></i>
+								十月 15日, 2019				
+							</p>
+							<p class="relate-post-content">
+								1.文件状态对于user.name与user.email来说，有三个地方可以设置
+123456789101112131415git config --global --unset user.name 删除信息git config --...
+							</p>
+						</div>
+
+						<div class="relate-post-cover">
+							<a href="/linux/linux/git/git -- one/" title="git 基本操作（一）">				
+								
+								<img class="lazy" src="/img/placeholder.jpg" data-src="/img/1.jpg" alt="git 基本操作（一）"/>
 							</a>
 						</div>
 					</li>											
